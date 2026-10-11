@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Comet Critters — Slingshot Physics Game</title>
+<meta name="description" content="Fling comet critters from a slingshot to topple towers and pop the invading Gloops. An original browser physics game.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game-root">
+    <canvas id="game" role="img" aria-label="Comet Critters game area: drag the comet on the slingshot and release to launch it at the towers"></canvas>
+
+    <!-- HUD -->
+    <header id="hud" class="hidden" aria-live="polite">
+      <div class="hud-group">
+        <button id="btn-levels" class="hud-btn" aria-label="Open level selection" title="Levels (Esc)">☰</button>
+        <button id="btn-restart" class="hud-btn" aria-label="Restart level" title="Restart (R)">↺</button>
+        <button id="btn-mute" class="hud-btn" aria-label="Toggle sound" aria-pressed="false" title="Sound">♪</button>
+      </div>
+      <div class="hud-group hud-center">
+        <span id="hud-level" class="hud-text">Level 1</span>
+        <span id="hud-ammo" class="hud-ammo" aria-label="Remaining comets"></span>
+      </div>
+      <div class="hud-group">
+        <span class="hud-text" id="hud-score" aria-label="Score">0</span>
+      </div>
+    </header>
+
+    <p id="rotate-hint" aria-hidden="true">Rotate your device for a better view ↻</p>
+
+    <!-- Overlays -->
+    <div id="overlay">
+      <!-- Start / instructions -->
+      <section id="panel-start" class="panel" role="dialog" aria-labelledby="title-start">
+        <h1 id="title-start">Comet <span class="accent">Critters</span></h1>
+        <p class="tagline">The Gloops have invaded the twilight meadow. Fling your comets and pop them all!</p>
+        <ul class="howto">
+          <li><b>Drag</b> the comet on the slingshot back with mouse or touch.</li>
+          <li><b>Aim</b> using the dotted arc, then <b>release</b> to launch.</li>
+          <li><b>Smash</b> wood, shatter glass, and topple stone onto every Gloop.</li>
+          <li>Pop all Gloops before your comets run out. Spare comets = bonus points!</li>
+        </ul>
+        <p class="keys">Keyboard: <kbd>R</kbd> restart · <kbd>Esc</kbd> levels · <kbd>N</kbd> next level</p>
+        <div class="btn-row">
+          <button id="btn-play" class="btn btn-primary" autofocus>Play</button>
+          <button id="btn-start-levels" class="btn">Levels</button>
+        </div>
+      </section>
+
+      <!-- Level select -->
+      <section id="panel-levels" class="panel hidden" role="dialog" aria-labelledby="title-levels">
+        <h2 id="title-levels">Choose a Level</h2>
+        <div id="level-grid" class="level-grid"></div>
+        <div class="btn-row">
+          <button id="btn-levels-back" class="btn">Back</button>
+        </div>
+      </section>
+
+      <!-- Win -->
+      <section id="panel-win" class="panel hidden" role="dialog" aria-labelledby="title-win">
+        <h2 id="title-win">Level Clear!</h2>
+        <p id="win-stars" class="stars" aria-label="Stars earned"></p>
+        <p class="result-line">Score: <span id="win-score">0</span></p>
+        <p class="result-line small" id="win-bonus"></p>
+        <div class="btn-row">
+          <button id="btn-win-retry" class="btn" aria-label="Replay this level">Retry</button>
+          <button id="btn-win-levels" class="btn" aria-label="Level selection">Levels</button>
+          <button id="btn-win-next" class="btn btn-primary" aria-label="Next level">Next ▸</button>
+        </div>
+      </section>
+
+      <!-- Lose -->
+      <section id="panel-lose" class="panel hidden" role="dialog" aria-labelledby="title-lose">
+        <h2 id="title-lose">Out of Comets!</h2>
+        <p class="result-line">Some Gloops survived. Score: <span id="lose-score">0</span></p>
+        <div class="btn-row">
+          <button id="btn-lose-retry" class="btn btn-primary" aria-label="Try this level again">Retry</button>
+          <button id="btn-lose-levels" class="btn" aria-label="Level selection">Levels</button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
